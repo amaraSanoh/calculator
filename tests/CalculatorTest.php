@@ -11,13 +11,13 @@ class CalculatorTest extends AbstractTest
     {
         $response = $this->createClientWithCredentials()->request('POST', self::HOST_NAME.'/api/v1/compute', [
             'json' => [
-                "expression" => "1+1",
+                "expression" => "4+1+2",
             ]
         ]);
 
         $this->assertJsonContains(
             [
-                "compute" => "2"
+                "compute" => "7"
             ]     
         );
     }
@@ -26,13 +26,13 @@ class CalculatorTest extends AbstractTest
     {
         $response = $this->createClientWithCredentials()->request('POST', self::HOST_NAME.'/api/v1/compute', [
             'json' => [
-                "expression" => "1-1",
+                "expression" => "1-1-12",
             ]
         ]);
 
         $this->assertJsonContains(
             [
-                "compute" => "0"
+                "compute" => "-12"
             ]     
         );
     }
@@ -41,13 +41,13 @@ class CalculatorTest extends AbstractTest
     {
         $response = $this->createClientWithCredentials()->request('POST', self::HOST_NAME.'/api/v1/compute', [
             'json' => [
-                "expression" => "10/2",
+                "expression" => "10/2/5",
             ]
         ]);
 
         $this->assertJsonContains(
             [
-                "compute" => "5"
+                "compute" => "1"
             ]     
         );
     }
@@ -56,13 +56,13 @@ class CalculatorTest extends AbstractTest
     {
         $response = $this->createClientWithCredentials()->request('POST', self::HOST_NAME.'/api/v1/compute', [
             'json' => [
-                "expression" => "10*2",
+                "expression" => "10*2*10",
             ]
         ]);
 
         $this->assertJsonContains(
             [
-                "compute" => "20"
+                "compute" => "200"
             ]     
         );
     }
