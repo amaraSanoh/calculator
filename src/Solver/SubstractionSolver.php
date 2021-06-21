@@ -3,7 +3,7 @@
 namespace App\Solver;
 use App\Solver\AbstractSolver;
 
-class SoustractionSolver extends AbstractSolver
+class SubstractionSolver extends AbstractSolver
 {
     protected function getOperator(): string
     {

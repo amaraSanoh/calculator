@@ -67,7 +67,7 @@ class CalculatorTest extends AbstractTest
         );
     }
 
-    public function testSumSoustraction(): void
+    public function testSumSubstraction(): void
     {
         $response = $this->createClientWithCredentials()->request('POST', self::HOST_NAME.'/api/v1/compute', [
             'json' => [
@@ -82,7 +82,7 @@ class CalculatorTest extends AbstractTest
         );
     }
 
-    public function testSumSoustractionMult(): void
+    public function testSumSubstractionMult(): void
     {
         $response = $this->createClientWithCredentials()->request('POST', self::HOST_NAME.'/api/v1/compute', [
             'json' => [
@@ -97,7 +97,7 @@ class CalculatorTest extends AbstractTest
         );
     }
 
-    public function testSumSoustractionMultDiv(): void
+    public function testSumSubstractionMultDiv(): void
     {
         $response = $this->createClientWithCredentials()->request('POST', self::HOST_NAME.'/api/v1/compute', [
             'json' => [
@@ -108,6 +108,111 @@ class CalculatorTest extends AbstractTest
         $this->assertJsonContains(
             [
                 "compute" => "16.25"
+            ]     
+        );
+    }
+
+    public function testSubstractSubSymbolFront(): void
+    {
+        $response = $this->createClientWithCredentials()->request('POST', self::HOST_NAME.'/api/v1/compute', [
+            'json' => [
+                "expression" => "-1-1",
+            ]
+        ]);
+
+        $this->assertJsonContains(
+            [
+                "compute" => "-2"
+            ]     
+        );
+    }
+
+    public function testSubstractSubSymbolFrontSub(): void
+    {
+        $response = $this->createClientWithCredentials()->request('POST', self::HOST_NAME.'/api/v1/compute', [
+            'json' => [
+                "expression" => "-1-1-1",
+            ]
+        ]);
+
+        $this->assertJsonContains(
+            [
+                "compute" => "-3"
+            ]     
+        );
+    }
+
+    public function testSumPlusSymbolFront(): void
+    {
+        $response = $this->createClientWithCredentials()->request('POST', self::HOST_NAME.'/api/v1/compute', [
+            'json' => [
+                "expression" => "+1+1",
+            ]
+        ]);
+
+        $this->assertJsonContains(
+            [
+                "compute" => "2"
+            ]     
+        );
+    }
+
+    public function testSumPlusSymbolFrontSum(): void
+    {
+        $response = $this->createClientWithCredentials()->request('POST', self::HOST_NAME.'/api/v1/compute', [
+            'json' => [
+                "expression" => "+1+1+1",
+            ]
+        ]);
+
+        $this->assertJsonContains(
+            [
+                "compute" => "3"
+            ]     
+        );
+    }
+
+    public function testDecimal(): void
+    {
+        $response = $this->createClientWithCredentials()->request('POST', self::HOST_NAME.'/api/v1/compute', [
+            'json' => [
+                "expression" => "-1.2+3.4-2.6/4.25*21.3",
+            ]
+        ]);
+
+        $this->assertJsonContains(
+            [
+                "compute" => "-10.830588235294"
+            ]     
+        );
+    }
+
+    public function testDecimalMore(): void
+    {
+        $response = $this->createClientWithCredentials()->request('POST', self::HOST_NAME.'/api/v1/compute', [
+            'json' => [
+                "expression" => "-1.2+3.4-2.6/4.25*21.3/-12",
+            ]
+        ]);
+
+        $this->assertJsonContains(
+            [
+                "compute" => "3.2858823529412"
+            ]     
+        );
+    }
+
+    public function testDecimalMoreComplicated(): void
+    {
+        $response = $this->createClientWithCredentials()->request('POST', self::HOST_NAME.'/api/v1/compute', [
+            'json' => [
+                "expression" => "-1.2+3.4-2.6/4.25*21.3/-12*-3+3/-25.8",
+            ]
+        ]);
+
+        $this->assertJsonContains(
+            [
+                "compute" => "-1.173926128591"
             ]     
         );
     }

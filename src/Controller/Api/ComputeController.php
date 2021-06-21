@@ -5,7 +5,7 @@ namespace App\Controller\Api;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\{Request, JsonResponse};
-use App\Solver\{DivisionSolver, MultiplicationSolver, SumSolver, SoustractionSolver};
+use App\Solver\{DivisionSolver, MultiplicationSolver, SumSolver, SubstractionSolver};
 
 class ComputeController extends AbstractController
 {
@@ -14,7 +14,7 @@ class ComputeController extends AbstractController
         private DivisionSolver $divisionSolver,
         private MultiplicationSolver $multiplicationSolver,
         private SumSolver $sumSolver,
-        private SoustractionSolver $soustractionSolver
+        private SubstractionSolver $substractionSolver
     ){}
 
     #[Route('/api/v1/compute', name: 'api_compute')]
@@ -24,10 +24,10 @@ class ComputeController extends AbstractController
             $compute = $this->divisionSolver->solve($expression);
             $compute = $this->multiplicationSolver->solve($compute);
             $compute = $this->sumSolver->solve($compute);
-            $compute = $this->soustractionSolver->solve($compute);
+            $compute = $this->substractionSolver->solve($compute);
 
             return $this->json([
-                'compute' => $compute
+                'compute' => substr($compute, 0, 1) === '+' ? substr($compute, 1) : $compute
             ]);
         }
         

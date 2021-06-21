@@ -17,10 +17,21 @@ abstract class AbstractSolver
         while($turn) {
             $compute = preg_replace_callback($this->getRegex(), function ($matches) {
                 if(isset($matches[1])) {
-                    $expressionArray = explode($this->getOperator(), $matches[1]); 
+                    $match = $matches[1];
+                    $expressionArray = explode($this->getOperator(), $match);
+
+                    if(strpos($matches[1], '-') === 0 || strpos($matches[1], '+') === 0) {
+                        $match = substr($match, 1);
+                        $expressionArray = explode($this->getOperator(), $match);
+                        $expressionArray[0] = substr($matches[1], 0, 1).$expressionArray[0];
+
+                        $result = $this->compute(operand1 : $expressionArray[0], operand2 : $expressionArray[1]);  
+                        return substr($result, 0, 1) !== '+' && substr($result, 0, 1) !== '-' ? '+'.$result : $result;   
+                    } 
+
                     return $this->compute(operand1 : $expressionArray[0], operand2 : $expressionArray[1]);          
                 }
-                    
+                   
                 return $matches[0];
             }, $expression, limit : 1);
             
