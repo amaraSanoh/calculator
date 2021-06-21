@@ -12,11 +12,11 @@ class MultiplicationSolver extends AbstractSolver
 
     protected function compute(string $operand1, string $operand2): string
     {
-        return $operand1 * $operand2;
+        return strval(floatval($operand1) * floatval($operand2));
     }
 
     protected function getRegex(): string
     {
-        return "#(\d+\*\d+)#";
+        return "#(".$this->regexNumber."\*".$this->regexNumber.")#";
     }
 }

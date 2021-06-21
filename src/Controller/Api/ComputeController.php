@@ -25,6 +25,7 @@ class ComputeController extends AbstractController
             $compute = $this->multiplicationSolver->solve($compute);
             $compute = $this->sumSolver->solve($compute);
             $compute = $this->soustractionSolver->solve($compute);
+
             return $this->json([
                 'compute' => $compute
             ]);

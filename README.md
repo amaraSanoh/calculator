@@ -5,6 +5,10 @@ And all of symfony equirements are enabled too (like opcache ...).
 Read Makefile file about some useful commands  
 This project is build with Test Driven Development principle  
 Design Pattern : This project uses DP Method as a service to solve the arithmetic expressions  
+To run this API tests, run the following command :  
+symfony php bin/phpunit  
+Otherwise, make tests works too if make exists as an environment variable  
+
 
 
 # Versions  

@@ -66,4 +66,49 @@ class CalculatorTest extends AbstractTest
             ]     
         );
     }
+
+    public function testSumSoustraction(): void
+    {
+        $response = $this->createClientWithCredentials()->request('POST', self::HOST_NAME.'/api/v1/compute', [
+            'json' => [
+                "expression" => "10+2+10-2-5",
+            ]
+        ]);
+
+        $this->assertJsonContains(
+            [
+                "compute" => "15"
+            ]     
+        );
+    }
+
+    public function testSumSoustractionMult(): void
+    {
+        $response = $this->createClientWithCredentials()->request('POST', self::HOST_NAME.'/api/v1/compute', [
+            'json' => [
+                "expression" => "10+2+10-2-5*10*3*4",
+            ]
+        ]);
+
+        $this->assertJsonContains(
+            [
+                "compute" => "-580"
+            ]     
+        );
+    }
+
+    public function testSumSoustractionMultDiv(): void
+    {
+        $response = $this->createClientWithCredentials()->request('POST', self::HOST_NAME.'/api/v1/compute', [
+            'json' => [
+                "expression" => "10+2+10-2-5*10*3*4/5/4/8",
+            ]
+        ]);
+
+        $this->assertJsonContains(
+            [
+                "compute" => "16.25"
+            ]     
+        );
+    }
 }
