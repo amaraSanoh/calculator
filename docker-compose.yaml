@@ -1,3 +1,27 @@
 version: '3.8'
 services:
     
+    apache: 
+        build: docker/apache
+        container_name: apache
+        ports:
+            - '80:8080'
+            - '443:8443'
+        depends_on:
+            - cloner
+        volumes:
+            - /docker/apache/vhost.conf:/vhosts/vhost.conf:ro
+            - ./../:/app
+
+    cloner:
+        image: 'bitnami/git:latest'
+        command:
+            - clone
+            - https://github.com/amaraSanoh/calculator.git
+            - /app
+        # volumes:
+        #     - /:/app
+
+
+volumes: 
+    data:

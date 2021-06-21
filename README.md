@@ -36,4 +36,10 @@ If you have multiple PHP versions installed on your computer, you can tell Symfo
 Use any PHP 8.x version available : echo 8 > .php-version
 
 Run the command below if you don’t remember all the PHP versions installed on your computer:
-symfony local:php:list
+symfony local:php:list  
+
+# To install Apache and PHP8  
+Follow this link  https://computingforgeeks.com/how-to-install-php-on-debian-linux/  
+https://hub.docker.com/r/bitnami/apache#environment-variables  
+
+
