@@ -1,31 +1,22 @@
 <?php
 
 namespace App\Solver;
-use App\Solver\SolverInterface;
+use App\Solver\AbstractSolver;
 
-class SumSolver implements SolverInterface
+class SumSolver extends AbstractSolver
 {
-    public function solve(string $expression): string
+    protected function getOperator(): string
     {
-        $turn = true;
+       return '+';
+    }
 
-        while($turn) {
-            $compute = preg_replace_callback("#(\d+\+\d+)#", function ($matches) {
-                if(isset($matches[1])) {
-                    $expressionArray = explode('+', $matches[1]); 
-                    return $expressionArray[0] + $expressionArray[1];
-                }
+    protected function compute(string $operand1, string $operand2): string
+    {
+        return $operand1 + $operand2;
+    }
 
-                return $matches[0];
-            }, $expression);
-
-            if($compute !== $expression) {
-                $expression = $compute;
-            } else {
-                $turn = false;
-            }
-        }
-
-        return $expression;
+    protected function getRegex(): string
+    {
+        return "#(\d+\+\d+)#";
     }
 }

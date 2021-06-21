@@ -4,7 +4,7 @@ In this project, PHP curl extension is activate for better performnce
 And all of symfony equirements are enabled too (like opcache ...).  
 Read Makefile file about some useful commands  
 This project is build with Test Driven Development principle  
-Design Pattern : This project uses DP Strategy as a service to solve the arithmetic expressions  
+Design Pattern : This project uses DP Method as a service to solve the arithmetic expressions  
 
 
 # Versions  
