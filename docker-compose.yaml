@@ -10,7 +10,7 @@ services:
         depends_on:
             - cloner
         volumes:
-            - /docker/apache/vhost.conf:/vhosts/vhost.conf:ro
+            - ./docker/apache/vhost.conf:/vhosts/vhost.conf:ro
             - ./../:/app
 
     cloner:
