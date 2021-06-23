@@ -21,10 +21,17 @@ class ComputeController extends AbstractController
     public function compute(Request $request): JsonResponse
     {
         if(null !== $expression = json_decode($request->getContent())?->expression) {
-            $compute = $this->divisionSolver->solve($expression);
-            $compute = $this->multiplicationSolver->solve($compute);
-            $compute = $this->sumSolver->solve($compute);
-            $compute = $this->substractionSolver->solve($compute);
+            try {
+                $compute = $this->divisionSolver->solve($expression);
+                $compute = $this->multiplicationSolver->solve($compute);
+                $compute = $this->sumSolver->solve($compute);
+                $compute = $this->substractionSolver->solve($compute);
+            } catch(\Exception $e) {
+                return $this->json([
+                    'error' => $e->getMessage()
+                ]);        
+            }
+            
 
             return $this->json([
                 'compute' => substr($compute, 0, 1) === '+' ? substr($compute, 1) : $compute

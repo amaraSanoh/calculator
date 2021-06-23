@@ -216,4 +216,64 @@ class CalculatorTest extends AbstractTest
             ]     
         );
     }
+
+    public function testAvoidZero(): void
+    {
+        $response = $this->createClientWithCredentials()->request('POST', self::HOST_NAME.'/api/v1/compute', [
+            'json' => [
+                "expression" => ".21-.2",
+            ]
+        ]);
+
+        $this->assertJsonContains(
+            [
+                "compute" => "0.01"
+            ]     
+        );
+    }
+
+    public function testAvoidZeroComplicated(): void
+    {
+        $response = $this->createClientWithCredentials()->request('POST', self::HOST_NAME.'/api/v1/compute', [
+            'json' => [
+                "expression" => ".21-.2/21.",
+            ]
+        ]);
+
+        $this->assertJsonContains(
+            [
+                "compute" => "0.20047619047619"
+            ]     
+        );
+    }
+
+    public function testErrorCase(): void
+    {
+        $response = $this->createClientWithCredentials()->request('POST', self::HOST_NAME.'/api/v1/compute', [
+            'json' => [
+                "expression" => ".21.-.2/21.",
+            ]
+        ]);
+
+        $this->assertJsonContains(
+            [
+                "error" => "Operand malformed",
+            ]     
+        );
+    }
+
+    public function testErrorCase2(): void
+    {
+        $response = $this->createClientWithCredentials()->request('POST', self::HOST_NAME.'/api/v1/compute', [
+            'json' => [
+                "expression" => "123.21.234-.2/21.23.56",
+            ]
+        ]);
+
+        $this->assertJsonContains(
+            [
+                "error" => "Operand malformed",
+            ]     
+        );
+    }
 }
