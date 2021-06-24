@@ -1,0 +1,51 @@
+
+Plant UML link : 
+http://www.plantuml.com/plantuml/uml/ZPF1IiGm48RlynG3xa4FidZjGLPsBmhYGlK1OZhk1j8a9fEgRo_fhWITWBrDXt---LewcyGgSXuji65B7VPc39RmRd-FMsLrjefzn9xUCpbDk3Fg4DK8e7JfloIAUA6_b8EvlBx5hHz3Pjfwnz5RIn4xF387Z8MH6DSgcFLqizQd83ZFXD4SZep-RIO29dA3SGUapn0f9UCTVXW-ulwfVqOWDs2PAX9cKanoAO3qA7BrbJey2rokwfQhYgnHW5eNoCvCfeHxRoSge5IADkPF6E3tit1QdQLWe3P2s3ncooPOenLBfnzS5Mhc0MHtePmSb8fz7l_rgY60KYutg8DYxMlYgFIoxoBJ0BAtq4YYwb3xIDgaEjN-eKy7sE53yWuZfU1TelbKsZXv9XjoGnxjDm00
+
+
+Plant UML Code : 
+
+@startuml
+title: Simple API Calculator Sequence Diagram
+
+actor User #cyan
+User -> ComputeController : http request /api/v1/compute
+note right of User
+ sending expression with POST 
+end note
+activate ComputeController
+
+ComputeController -> Calculator : compute($expression)
+activate Calculator
+
+Calculator -> DivisionSolver : solve($expression)
+activate DivisionSolver
+
+DivisionSolver -> Calculator : $compute
+deactivate DivisionSolver
+
+Calculator -> MultiplicationSolver : solve($compute)
+activate MultiplicationSolver
+
+MultiplicationSolver -> Calculator : $compute
+deactivate MultiplicationSolver
+
+Calculator -> SumSolver : solve($compute)
+activate SumSolver
+
+SumSolver -> Calculator : $compute
+deactivate SumSolver
+
+Calculator -> SubstractionSolver : solve($compute)
+activate SubstractionSolver
+
+SubstractionSolver -> Calculator : $compute
+deactivate SubstractionSolver
+
+Calculator -> ComputeController : $compute
+deactivate Calculator
+
+ComputeController -> User : Json response with $compute
+deactivate ComputeController
+@enduml
+
