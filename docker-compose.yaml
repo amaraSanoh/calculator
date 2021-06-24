@@ -7,21 +7,22 @@ services:
         ports:
             - '80:8080'
             - '443:8443'
-        depends_on:
-            - cloner
+        # depends_on:
+        #   - cloner
         volumes:
             - ./docker/apache/vhost.conf:/vhosts/vhost.conf:ro
             - ./../:/app
+        # command: symfony composer install
 
-    cloner:
-        image: 'bitnami/git:latest'
-        command:
-            - clone
-            - https://github.com/amaraSanoh/calculator.git
-            - /app
+    # cloner:
+    #     image: 'bitnami/git:latest'
+    #     command:
+    #         - clone
+    #         - https://github.com/amaraSanoh/calculator.git
+    #         - /app
         # volumes:
         #     - /:/app
 
 
-volumes: 
-    data:
+# volumes: 
+#     data:
