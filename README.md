@@ -9,6 +9,7 @@ To run this API tests, run the following command :
 symfony php bin/phpunit  
 Otherwise, make tests works too if make exists as an environment variable  
 It uses symfony server to run the app and symfony cli to execute any commands   
+This app contains 27 unit tests  
 
 # Entry-points  
 This Api has only one entry-point. See it below :
