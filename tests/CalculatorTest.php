@@ -247,7 +247,7 @@ class CalculatorTest extends AbstractTest
         );
     }
 
-    public function testErrorCase(): void
+    public function testErrorCaseDoubleDot(): void
     {
         $response = $this->createClientWithCredentials()->request('POST', self::HOST_NAME.'/api/v1/compute', [
             'json' => [
@@ -262,7 +262,7 @@ class CalculatorTest extends AbstractTest
         );
     }
 
-    public function testErrorCase2(): void
+    public function testErrorCaseDoubleDot2(): void
     {
         $response = $this->createClientWithCredentials()->request('POST', self::HOST_NAME.'/api/v1/compute', [
             'json' => [
@@ -276,4 +276,140 @@ class CalculatorTest extends AbstractTest
             ]     
         );
     }
+
+    public function testErrorCaseSumSubs(): void
+    {
+        $response = $this->createClientWithCredentials()->request('POST', self::HOST_NAME.'/api/v1/compute', [
+            'json' => [
+                "expression" => "123+-2/21.23",
+            ]
+        ]);
+
+        $this->assertJsonContains(
+            [
+                "compute" => "Operand malformed",
+            ]     
+        );
+    }
+
+    public function testErrorCaseSubsSum(): void
+    {
+        $response = $this->createClientWithCredentials()->request('POST', self::HOST_NAME.'/api/v1/compute', [
+            'json' => [
+                "expression" => "123-+2/21.23",
+            ]
+        ]);
+
+        $this->assertJsonContains(
+            [
+                "compute" => "Operand malformed",
+            ]     
+        );
+    }
+
+    public function testErrorCaseDivMult(): void
+    {
+        $response = $this->createClientWithCredentials()->request('POST', self::HOST_NAME.'/api/v1/compute', [
+            'json' => [
+                "expression" => "123/*21.23",
+            ]
+        ]);
+
+        $this->assertJsonContains(
+            [
+                "compute" => "Operand malformed",
+            ]     
+        );
+    }
+
+    public function testErrorCaseMultMult(): void
+    {
+        $response = $this->createClientWithCredentials()->request('POST', self::HOST_NAME.'/api/v1/compute', [
+            'json' => [
+                "expression" => "123**21.23",
+            ]
+        ]);
+
+        $this->assertJsonContains(
+            [
+                "compute" => "Operand malformed",
+            ]     
+        );
+    }
+
+    public function testErrorCaseDivDiv(): void
+    {
+        $response = $this->createClientWithCredentials()->request('POST', self::HOST_NAME.'/api/v1/compute', [
+            'json' => [
+                "expression" => "123//21.23",
+            ]
+        ]);
+
+        $this->assertJsonContains(
+            [
+                "compute" => "Operand malformed",
+            ]     
+        );
+    }
+
+    public function testErrorCaseSubsSubs(): void
+    {
+        $response = $this->createClientWithCredentials()->request('POST', self::HOST_NAME.'/api/v1/compute', [
+            'json' => [
+                "expression" => "123--21.23",
+            ]
+        ]);
+
+        $this->assertJsonContains(
+            [
+                "compute" => "Operand malformed",
+            ]     
+        );
+    }
+
+    public function testErrorCaseSumSum(): void
+    {
+        $response = $this->createClientWithCredentials()->request('POST', self::HOST_NAME.'/api/v1/compute', [
+            'json' => [
+                "expression" => "123++21.23",
+            ]
+        ]);
+
+        $this->assertJsonContains(
+            [
+                "compute" => "Operand malformed",
+            ]     
+        );
+    }
+
+    public function testErrorCaseSymbols(): void
+    {
+        $response = $this->createClientWithCredentials()->request('POST', self::HOST_NAME.'/api/v1/compute', [
+            'json' => [
+                "expression" => "123////////21.23+++-----///899.56",
+            ]
+        ]);
+
+        $this->assertJsonContains(
+            [
+                "compute" => "Operand malformed",
+            ]     
+        );
+    }
+
+    public function testErrorCaseAlpha(): void
+    {
+        $response = $this->createClientWithCredentials()->request('POST', self::HOST_NAME.'/api/v1/compute', [
+            'json' => [
+                "expression" => "this is not an arithmetic expression",
+            ]
+        ]);
+
+        $this->assertJsonContains(
+            [
+                "compute" => "Operand malformed",
+            ]     
+        );
+    }
+
 }
