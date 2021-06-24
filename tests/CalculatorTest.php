@@ -257,7 +257,7 @@ class CalculatorTest extends AbstractTest
 
         $this->assertJsonContains(
             [
-                "error" => "Operand malformed",
+                "compute" => "Operand malformed",
             ]     
         );
     }
@@ -272,7 +272,7 @@ class CalculatorTest extends AbstractTest
 
         $this->assertJsonContains(
             [
-                "error" => "Operand malformed",
+                "compute" => "Operand malformed",
             ]     
         );
     }
