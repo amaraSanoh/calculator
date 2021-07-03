@@ -1,0 +1,61 @@
+
+
+Api services classes diagram link : 
+http://www.plantuml.com/plantuml/uml/lPDBRl8m4CVtFiM8V0luK3W02mI2BbZqeN82OwQHLJ-iyPXIbTwz0g8eHN7KBkWoza_pVyGpZoo9apM2DHkSmk9f3KjfL3AIFS46QQyLHbXfMP6qGcZ7I2zIOGjRDsT5qEuLFWJ069It8J4E8vDs5Vp3Go2CKNitciBbK7mAeOoCiQrPg7VfVZT3RYEJL0oNOOlwS-FD7WaAJz9LU1vPGCCILdXuI7QB1Csm7757v7DOXVmOa4xcXwCyiwopz23F9y7lm1ZYESNFQbpflJvTrSalYVF-yhOwtJGozycm3aOhoRSNswIweR-GiZTJkFerPGhbSNRrL4L7iJcqevOSQ7llMwjNxloRAmV_1ptC98N9STQn_6AERfUi-G80
+
+
+
+
+@startuml
+title: API Calculator Services Diagram
+
+interface CalculatorInterface #pink {
+  + compute(string $expression): string
+}
+
+class Calculator #cyan {
+  + compute(string $expression): string
+}
+
+abstract class AbstractSolver #orange {
+  # abstract regexNumber : string
+  # abstract regexNumberError : string
+  # abstract getOperator() : string
+  # abstract getCompute() : string
+  # abstract getRegex() : string
+  + solver(string $expression): string
+}
+
+class DivisionSolver {
+  # getOperator() : string
+  # getCompute() : string
+  # getRegex() : string
+}
+
+class MultiplicationSolver {
+  # getOperator() : string
+  # getCompute() : string
+  # getRegex() : string
+}
+
+class SubstractionSolver {
+  # getOperator() : string
+  # getCompute() : string
+  # getRegex() : string
+}
+
+class SumSolver {
+  # getOperator() : string
+  # getCompute() : string
+  # getRegex() : string
+}
+
+DivisionSolver -up-|> AbstractSolver
+MultiplicationSolver -up-|> AbstractSolver
+SubstractionSolver -up-|> AbstractSolver
+SumSolver -up-|> AbstractSolver
+Calculator -down-"*" AbstractSolver
+Calculator .up.|>CalculatorInterface
+@enduml
+
+
