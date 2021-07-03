@@ -1,7 +1,7 @@
 <?php
 
-namespace App\Solver;
-use App\Solver\AbstractSolver;
+namespace App\Services\Solver;
+use App\Services\Solver\AbstractSolver;
 
 class SubstractionSolver extends AbstractSolver
 {

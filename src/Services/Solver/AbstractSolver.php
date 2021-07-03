@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Solver;
+namespace App\Services\Solver;
 
 abstract class AbstractSolver
 {

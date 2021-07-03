@@ -5,7 +5,7 @@ namespace App\Controller\Api;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\{Request, JsonResponse};
-use App\Solver\Calculator;
+use App\Services\Solver\Calculator;
 
 class ComputeController extends AbstractController
 {

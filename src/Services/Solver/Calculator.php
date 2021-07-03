@@ -1,7 +1,7 @@
 <?php
 
-namespace App\Solver;
-use App\Solver\{DivisionSolver, MultiplicationSolver, SumSolver, SubstractionSolver};
+namespace App\Services\Solver;
+use App\Services\Solver\{DivisionSolver, MultiplicationSolver, SumSolver, SubstractionSolver};
 
 class Calculator
 {
