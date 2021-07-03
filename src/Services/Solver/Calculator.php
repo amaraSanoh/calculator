@@ -1,16 +1,29 @@
 <?php
 
 namespace App\Services\Solver;
-use App\Services\Solver\{DivisionSolver, MultiplicationSolver, SumSolver, SubstractionSolver};
 
-class Calculator
+use App\Services\Solver\{
+    CalculatorInterface,
+    DivisionSolver,
+    MultiplicationSolver,
+    SumSolver,
+    SubstrationSolver
+};
+
+
+class Calculator implements CalculatorInterface
 {
-    public function __construct(
-        private DivisionSolver $divisionSolver,
-        private MultiplicationSolver $multiplicationSolver,
-        private SumSolver $sumSolver,
-        private SubstractionSolver $substractionSolver
-    ) {}
+    protected DivisionSolver $divisionSolver;
+    protected MultiplicationSolver $multiplicationSolver;
+    protected SumSolver $sumSolver;
+    protected SubstractionSolver $substractionSolver;
+
+    public function __construct() {
+        $this->divisionSolver = new DivisionSolver();
+        $this->multiplicationSolver = new MultiplicationSolver();
+        $this->sumSolver = new SumSolver();
+        $this->substractionSolver = new SubstractionSolver();
+    }
 
     public function compute(string $expression): string
     {
